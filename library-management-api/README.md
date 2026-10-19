@@ -126,17 +126,17 @@ The tests use a temporary in-memory SQLite database, so MySQL isn't needed. They
 
 ## What I learned
 
-- Designing a small relational database: choosing tables, foreign keys, unique columns and indexes based on how the data is actually queried
-- Using a `NULL` column (`returned_at`) to tell apart current loans from past loans
-- Adding `CHECK` constraints so the database itself blocks invalid data, not just the API
-- Writing reports with `JOIN`, `GROUP BY`, `COUNT` and `HAVING`, both as raw SQL and with SQLAlchemy
-- Turning business rules (loan limits, availability) into clear validation with helpful error messages
-- Writing pytest tests for each rule, and running the same tests against both SQLite and MySQL
+- Designing a relational database and choosing certain elements (e.g., foreign keys, unique columns) based on how the data ia actually queried
+- Adding a `NULL` column (`returned_at`) to differentiate past loans from current loans
+- Adding `CHECK` constraints so that invalid data is blocked at the database level (and not just the API level)
+- Writing reports (both as raw SQL and with SQLAlchemy) with `JOIN`, `GROUP BY`, `COUNT` and `HAVING` 
+- Turning business rules (like loan limits and availability) into clear and concise validation with helpful error messages
+- Writing flexible pytest tests for each rule that run against both SQLite and MySQL
 
 ## Future improvements
 
-- Add staff login so only librarians can add books or record loans
-- Let members **reserve** a book that's currently checked out and get it when it's returned
-- Calculate **late fees** for overdue books
-- Prevent two librarians lending the last copy at the exact same moment (by locking the book row during checkout)
-- Allow renewing a loan to extend the due date
+- Add a staff login so that only librarians can add books or record loans
+- Let members reserve a book that's currently checked out and then receive it when it's returned
+- Calculate late fees for books that are overdue
+- Prevent two librarians from lending the last copy at the exact same moment (e.g., by locking the book row during checkout)
+- Allow renewing a loan in order to extend the due date
